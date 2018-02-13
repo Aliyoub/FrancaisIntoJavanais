@@ -29,26 +29,24 @@ public class FrancaisIntoJavanais {
 		String francaisIntoJavanais = "";		
 		int i = 0;
 		while (i < this.word.length()) {
-			// Traitement du premier caractère du mot
-			if (i==0 && isVowel(this.word.charAt(0))) {
-				francaisIntoJavanais = "av" + this.word.charAt(0);
+			try{
+				// Traitement du premier caractère du mot
+				if (i==0 && isVowel(this.word.charAt(0))) {
+					francaisIntoJavanais = "av" + this.word.charAt(0);
+				}
+	
+				// Traitement du caractère s'il n'est ni le premier ni le dernier dans le mot
+				else if (isConsonant(this.word.charAt(i)) && isVowel(this.word.charAt(i + 1)) && (i != this.word.length() - 1)) {
+					francaisIntoJavanais += this.word.charAt(i) + "av";
+				}
+				// Sinon...
+				else {
+					francaisIntoJavanais += this.word.charAt(i);
+				}
 			}
-			// Traitement du dernier caractère du mot
-			else if (i == this.word.length() - 1) {
-				francaisIntoJavanais += this.word.charAt(i);
-			}
-
-			// Traitement du caractère s'il n'est ni le premier ni le dernier dans le mot
-			else if (isConsonant(this.word.charAt(i)) && isVowel(this.word.charAt(i + 1))) {
-				francaisIntoJavanais += this.word.charAt(i) + "av";
-			}
-			// Sinon...
-			else {
-				francaisIntoJavanais += this.word.charAt(i);
-			}
+			catch(StringIndexOutOfBoundsException e){}
 			i++;
 		}
 		return francaisIntoJavanais;
 	}
-
 }
